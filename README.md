@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/PolarNick239/CSCTasksExecutor.svg)](https://travis-ci.org/PolarNick239/CSCTasksExecutor)
