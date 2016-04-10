@@ -39,14 +39,14 @@ public class TasksManagerTest {
                     new ValueParam<>((long) r.nextInt(100)),
                     new ValueParam<>((long) r.nextInt(100)),
                     new ValueParam<>((long) r.nextInt(100)),
-                    new ValueParam<>((long) (N / 6)), new ValueParam<>(100000l));
+                    new ValueParam<>((long) Math.max(1, (N / 6))), new ValueParam<>(100000L));
             task.run();
             tasks.add(task);
             if ((i + 1) % 100 == 0) {
                 System.out.println("Prepared " + (i + 1) + " / " + N + " tasks!");
             }
         }
-        new Thread(tasksManager).start();
+        new Thread(tasksManager, "TasksManager").start();
         executor = Executors.newFixedThreadPool(N);
     }
 

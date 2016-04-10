@@ -4,10 +4,9 @@ import com.polarnick.hp.tasks.Task;
 import com.polarnick.hp.tasks.TaskDoneCallback;
 import com.polarnick.hp.tasks.params.DependentTaskNotFoundException;
 import com.polarnick.hp.tasks.params.TaskDependentParam;
+import com.polarnick.hp.utils.FixedThreadPoolExecutor;
 
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 /**
@@ -29,7 +28,7 @@ public class TasksManager implements TaskDoneCallback, Runnable {
     private final Map<Integer, List<Integer>> taskSubscriptions;
     private final Set<Integer> tasksPostProcessed;
 
-    private final ExecutorService executor;
+    private final FixedThreadPoolExecutor executor;
 
     public TasksManager(int executionThreads) {
         this.nextTaskId = 0;
@@ -43,7 +42,7 @@ public class TasksManager implements TaskDoneCallback, Runnable {
         this.taskSubscriptions = new HashMap<>();
         this.tasksPostProcessed = new HashSet<>();
 
-        this.executor = Executors.newFixedThreadPool(executionThreads);  // TODO: implement simple ExecutorService
+        this.executor = new FixedThreadPoolExecutor(executionThreads);
     }
 
     public synchronized int generateTaskId() {

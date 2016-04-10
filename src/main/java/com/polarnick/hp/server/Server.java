@@ -52,7 +52,7 @@ public class Server implements Runnable {
 
         int threadsNumber = params.threadsNumber;
         if (threadsNumber == -1) {
-            threadsNumber = Runtime.getRuntime().availableProcessors();
+            threadsNumber = Runtime.getRuntime().availableProcessors() + 1;
         }
         Server server = new Server(params.port, threadsNumber);
         server.run();
